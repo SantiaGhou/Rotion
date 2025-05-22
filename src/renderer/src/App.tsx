@@ -1,19 +1,15 @@
-import './styles/global.css'
+import { QueryClientProvider } from '@tanstack/react-query';
 
-import { Sidebar } from './components/Sidebar'
-import { Header } from './components/Header'
+import { queryClient } from './lib/react-query';
+
+import { Routes } from './Routes';
+
+import './styles/global.css';
 
 export function App() {
   return (
-    <div className="h-screen w-screen bg-rotion-900 text-rotion-100 flex">
-      <Sidebar />
-      <div className="flex-1 flex flex-col max-h-screen">
-        <Header />
-
-        <main className="flex-1 flex items-center justify-center text-rotion-400">
-          Selecione ou crie um documento
-        </main>
-      </div>
-    </div>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Routes />;
+    </QueryClientProvider>
+  );
 }

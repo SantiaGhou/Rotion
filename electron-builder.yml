@@ -1,5 +1,4 @@
-appId: com.electron.app
-productName: rotion
+productName: Rotion
 directories:
   buildResources: build
 files:
@@ -7,10 +6,11 @@ files:
   - '!src/*'
   - '!electron.vite.config.{js,ts,mjs,cjs}'
   - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
-  - '**/*.{node,dll}'
-afterSign: build/notarize.js
+  - resources/**
+
 win:
   executableName: rotion
 nsis:
@@ -30,13 +30,16 @@ dmg:
 linux:
   target:
     - AppImage
-    - snap
+    # - snap
     - deb
-  maintainer: electronjs.org
+    - rpm
+    - pacman
+    - freebsd
+  synopsis: ${description}
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates
+# publish:
+#   provider: generic
+#   url: https://example.com/auto-updates
